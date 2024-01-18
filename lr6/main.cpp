@@ -2,13 +2,15 @@
 #include <limits.h>
 
 extern "C" {
-	int CalcOne(int);
-	int CalcTwo(int);
-	int CalcThree(int);
+	float CalcOne(float);
+	float CalcTwo(float);
+	float CalcThree(float);
 }
 
-int InputX() {
-	int in_x = 0;
+int is_err = 0;
+
+float InputX() {
+	float in_x = 0;
 
 	cout << "Enter X of range: from "
              << INT_MIN
@@ -19,6 +21,7 @@ int InputX() {
 
 	if (cin.fail()) {
 		cout << "Faild input" << endl;
+		is_err = -1;
 	}
 
 	return in_x;
@@ -26,10 +29,14 @@ int InputX() {
 
 
 int main() {
-	int in_x = 0;
-	int res = 0;
+	float in_x = 0;
+	float res = 0;
 
 	in_x = InputX();
+
+	if (is_err == -1) {
+		return 0;
+	}
 
 	if (in_x < 0) {
         res = CalcOne(in_x);
